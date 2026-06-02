@@ -13,7 +13,7 @@ const PORT = {
 
 const PROJECTS = [
   { id:'dtx',     featured:true,  accent:'#4d9de0', cat:'Web App',
-    title:'DTX Dispatch',              sub:'Field Operations Tool',
+    title:'Handyman Dispatch',              sub:'Field Operations Tool',
     desc:'Map-based dispatch tool for a handyman service across the Dallas–Fort Worth metroplex. Manages technician schedules, job routing, zip code lookups, and service area coverage — all in the browser, zero backend.',
     tags:['Next.js 14','Leaflet.js','Tailwind CSS','OpenStreetMap'],
     github:'https://github.com/Shiroyasha21/dtx-dispatch', live:null },
