@@ -615,6 +615,14 @@ function ProjectModal({ p, onClose }) {
           <span className="modal-cat" style={{ color: p.accent, borderColor: p.accent + '50' }}>{p.cat}</span>
         </div>
 
+        {p.live && !p.liveLinks && (
+          <a href={p.live} target="_blank" rel="noopener" className="modal-demo-banner"
+            style={{ background: p.accent }}>
+            <span>Try the Live Demo</span>
+            <Ico n="ext" size={15} />
+          </a>
+        )}
+
         {p.img && (
           <div className="modal-img-wrap" role="button" tabIndex={0}
             onClick={() => setLightbox(true)}
