@@ -32,6 +32,32 @@ const PROJECTS = [
     githubReq: true, github: null, live: 'https://dtx-dispatch.vercel.app/',
   },
   {
+    id: 'whatsapp', featured: true, accent: '#25d366', cat: 'Automation',
+    title: 'WhatsApp Support Bot', sub: 'Customer Support Demo',
+    desc: 'Chatbot that simulates an enterprise customer support flow through WhatsApp. Handles warranty checks and service ticket submission via natural conversation, with automated email confirmations — built entirely with free tools.',
+    details: 'Built as a portfolio demonstration of what a real support pipeline could look like using free tools. The bot handles a full support flow over WhatsApp: greets the user, collects their name, email, and contact number, checks their product serial number against a live Google Sheets database, and routes them to either an RMA or Tech Service ticket based on warranty status.\n\nThree warranty states are handled: active coverage, expired warranty, and unrecognized serial number — each with a distinct conversation path. Once a ticket is submitted, an automated email confirmation is sent via Google Apps Script\'s built-in MailApp.\n\nThe official WhatsApp Business API was deliberately avoided. It requires business verification and charges per conversation. whatsapp-web.js provides the same interface through a linked secondary number at zero cost. Google Sheets replaces a traditional database, and Apps Script exposes a simple HTTPS endpoint — no OAuth complexity, no backend server to maintain.',
+    highlights: [
+      'Full conversation flow: collects name, email, contact number, and serial number through natural back-and-forth',
+      'Three warranty states handled: active coverage, expired warranty, and unrecognized serial number — each routes differently',
+      'RMA or Tech Service ticket selection, written directly to Google Sheets on submission',
+      'Automated email confirmation sent via Apps Script MailApp on every successful ticket',
+      'whatsapp-web.js over the official API: no business verification, no per-conversation charges, zero cost',
+      'Google Sheets as the product database, Apps Script as the REST API — no backend server required',
+    ],
+    img: 'assets/WhatsApp focus - GIF.gif',
+    gifs: [
+      { src: 'assets/WhatsApp focus - GIF.gif', label: 'WhatsApp conversation' },
+      { src: 'assets/CMD  focus - GIF.gif',     label: 'Terminal output' },
+    ],
+    youtube: 'qZN-ZeTcFd8',
+    tags: ['Node.js', 'whatsapp-web.js', 'Google Sheets API', 'Apps Script', 'Gmail'],
+    github: 'https://github.com/Shiroyasha21/whatsapp-support-bot',
+    live: 'https://youtu.be/qZN-ZeTcFd8',
+    liveLinks: [
+      { label: 'Watch Full Demo', url: 'https://youtu.be/qZN-ZeTcFd8' },
+    ],
+  },
+  {
     id: 'gmail', featured: true, accent: '#c9896c', cat: 'Automation',
     title: 'Gmail Inbox Automation', sub: 'Smart Email Manager',
     desc: 'Automated Gmail system that surfaces brand emails, handles initial replies with cooldown and anti-loop detection, and keeps the inbox organized without manual intervention. Deployed in a live freelance engagement.',
@@ -623,12 +649,40 @@ function ProjectModal({ p, onClose }) {
           </a>
         )}
 
-        {p.img && (
+        {p.youtube && (
+          <div className="modal-section">
+            <div className="modal-section-lbl">Full Demo</div>
+            <div className="modal-yt-wrap">
+              <iframe
+                src={`https://www.youtube.com/embed/${p.youtube}`}
+                title={`${p.title} demo`}
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allowFullScreen
+              />
+            </div>
+          </div>
+        )}
+
+        {p.img && !p.gifs && (
           <div className="modal-img-wrap" role="button" tabIndex={0}
             onClick={() => setLightbox(true)}
             onKeyDown={e => e.key === 'Enter' && setLightbox(true)}>
             <img src={p.img} alt={p.title} className="modal-img" />
             <div className="modal-img-hint">Click to enlarge</div>
+          </div>
+        )}
+
+        {p.gifs && p.gifs.length > 0 && (
+          <div className="modal-section">
+            <div className="modal-section-lbl">In Action</div>
+            <div className="modal-gifs">
+              {p.gifs.map((g, i) => (
+                <div key={i} className="modal-gif-item">
+                  <img src={g.src} alt={g.label} />
+                  <div className="modal-gif-label">{g.label}</div>
+                </div>
+              ))}
+            </div>
           </div>
         )}
 
@@ -735,10 +789,11 @@ function ProjectsSection() {
       <FadeIn delay={60}>
         <div className="proj-featured">
           <PCard p={featured[0]} variant="lg" onOpen={setSelected} />
-          <div className="proj-col">
-            <PCard p={featured[1]} variant="md" onOpen={setSelected} />
-            <PCard p={featured[2]} variant="md" onOpen={setSelected} />
-          </div>
+          <PCard p={featured[1]} variant="lg" onOpen={setSelected} />
+        </div>
+        <div className="proj-mid">
+          <PCard p={featured[2]} variant="md" onOpen={setSelected} />
+          <PCard p={featured[3]} variant="md" onOpen={setSelected} />
         </div>
       </FadeIn>
       <FadeIn delay={120}>
