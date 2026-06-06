@@ -34,12 +34,12 @@ const PROJECTS = [
   {
     id: 'whatsapp', featured: true, accent: '#25d366', cat: 'Automation',
     title: 'WhatsApp Support Bot', sub: 'Customer Support Demo',
-    desc: 'Chatbot that simulates an enterprise customer support flow through WhatsApp. Handles warranty checks and service ticket submission via natural conversation, with automated email confirmations — built entirely with free tools.',
-    details: 'A portfolio demonstration of what a real customer support pipeline looks like using entirely free tools. Complete flow from intake to email confirmation — no official API, no backend costs.',
+    desc: 'Chatbot that simulates an enterprise customer support flow through WhatsApp. Handles warranty checks and service ticket submission via natural conversation, with automated email confirmations. Built entirely with free tools.',
+    details: 'A portfolio demonstration of what a real customer support pipeline looks like using entirely free tools. Complete flow from intake to email confirmation. No official API, no backend costs.',
     sections: [
       {
         heading: 'Conversation Flow',
-        body: 'The bot opens with a greeting and walks the user through support intake one step at a time — collecting name, email address, contact number, and product serial number through natural back-and-forth. Once it has the serial, it queries the Google Sheets product database and returns the warranty status immediately: active coverage, expired, or unrecognized. The user then selects a ticket type — RMA for returns and replacements, or Tech Service for on-site support — and the bot confirms the submission.',
+        body: 'The bot opens with a greeting and walks the user through support intake one step at a time, collecting name, email address, contact number, and product serial number through natural back-and-forth. Once it has the serial, it queries the Google Sheets product database and returns the warranty status immediately: active coverage, expired, or unrecognized. The user then selects a ticket type (RMA for returns and replacements, or Tech Service for on-site support) and the bot confirms the submission.',
         gif: { src: 'assets/WhatsApp focus - GIF.gif', label: 'WhatsApp conversation' },
         gifAbove: false,
       },
@@ -47,7 +47,7 @@ const PROJECTS = [
         heading: 'Under the Hood',
         gif: { src: 'assets/CMD  focus - GIF.gif', label: 'Terminal output' },
         gifAbove: true,
-        body: 'Every message is logged to the terminal in real time. The bot receives input, determines conversation state, queries the Sheets API for warranty data, routes to the correct ticket path, writes the ticket row directly to Google Sheets, and calls the Apps Script endpoint — which sends an automated email confirmation via MailApp. No paid backend, no OAuth complexity: a Node.js process, a Google Sheet, and an Apps Script web app URL.',
+        body: 'Every message is logged to the terminal in real time. The bot receives input, determines conversation state, queries the Sheets API for warranty data, routes to the correct ticket path, writes the ticket row directly to Google Sheets, and calls the Apps Script endpoint, which sends an automated email confirmation via MailApp. No paid backend, no OAuth complexity: a Node.js process, a Google Sheet, and an Apps Script web app URL.',
       },
     ],
     img: 'assets/WhatsApp focus - GIF.gif',
