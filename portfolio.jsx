@@ -35,20 +35,22 @@ const PROJECTS = [
     id: 'whatsapp', featured: true, accent: '#25d366', cat: 'Automation',
     title: 'WhatsApp Support Bot', sub: 'Customer Support Demo',
     desc: 'Chatbot that simulates an enterprise customer support flow through WhatsApp. Handles warranty checks and service ticket submission via natural conversation, with automated email confirmations — built entirely with free tools.',
-    details: 'Built as a portfolio demonstration of what a real support pipeline could look like using free tools. The bot handles a full support flow over WhatsApp: greets the user, collects their name, email, and contact number, checks their product serial number against a live Google Sheets database, and routes them to either an RMA or Tech Service ticket based on warranty status.\n\nThree warranty states are handled: active coverage, expired warranty, and unrecognized serial number — each with a distinct conversation path. Once a ticket is submitted, an automated email confirmation is sent via Google Apps Script\'s built-in MailApp.\n\nThe official WhatsApp Business API was deliberately avoided. It requires business verification and charges per conversation. whatsapp-web.js provides the same interface through a linked secondary number at zero cost. Google Sheets replaces a traditional database, and Apps Script exposes a simple HTTPS endpoint — no OAuth complexity, no backend server to maintain.',
-    highlights: [
-      'Full conversation flow: collects name, email, contact number, and serial number through natural back-and-forth',
-      'Three warranty states handled: active coverage, expired warranty, and unrecognized serial number — each routes differently',
-      'RMA or Tech Service ticket selection, written directly to Google Sheets on submission',
-      'Automated email confirmation sent via Apps Script MailApp on every successful ticket',
-      'whatsapp-web.js over the official API: no business verification, no per-conversation charges, zero cost',
-      'Google Sheets as the product database, Apps Script as the REST API — no backend server required',
+    details: 'A portfolio demonstration of what a real customer support pipeline looks like using entirely free tools. Complete flow from intake to email confirmation — no official API, no backend costs.',
+    sections: [
+      {
+        heading: 'Conversation Flow',
+        body: 'The bot opens with a greeting and walks the user through support intake one step at a time — collecting name, email address, contact number, and product serial number through natural back-and-forth. Once it has the serial, it queries the Google Sheets product database and returns the warranty status immediately: active coverage, expired, or unrecognized. The user then selects a ticket type — RMA for returns and replacements, or Tech Service for on-site support — and the bot confirms the submission.',
+        gif: { src: 'assets/WhatsApp focus - GIF.gif', label: 'WhatsApp conversation' },
+        gifAbove: false,
+      },
+      {
+        heading: 'Under the Hood',
+        gif: { src: 'assets/CMD  focus - GIF.gif', label: 'Terminal output' },
+        gifAbove: true,
+        body: 'Every message is logged to the terminal in real time. The bot receives input, determines conversation state, queries the Sheets API for warranty data, routes to the correct ticket path, writes the ticket row directly to Google Sheets, and calls the Apps Script endpoint — which sends an automated email confirmation via MailApp. No paid backend, no OAuth complexity: a Node.js process, a Google Sheet, and an Apps Script web app URL.',
+      },
     ],
     img: 'assets/WhatsApp focus - GIF.gif',
-    gifs: [
-      { src: 'assets/WhatsApp focus - GIF.gif', label: 'WhatsApp conversation' },
-      { src: 'assets/CMD  focus - GIF.gif',     label: 'Terminal output' },
-    ],
     youtube: 'qZN-ZeTcFd8',
     tags: ['Node.js', 'whatsapp-web.js', 'Google Sheets API', 'Apps Script', 'Gmail'],
     github: 'https://github.com/Shiroyasha21/whatsapp-support-bot',
@@ -601,7 +603,8 @@ function LabModal({ onClose }) {
 
 /* ━━━━━━━━━━━━━━━━━━━━━━━━ PROJECT MODAL ━━━━━━━━━━━━━━━━━━━ */
 function ProjectModal({ p, onClose }) {
-  const [lightbox, setLightbox] = useState(false);
+  const [lightbox, setLightbox] = useState(null);
+  const ytRef = useRef(null);
 
   useEffect(() => {
     document.body.style.overflow = 'hidden';
@@ -611,7 +614,7 @@ function ProjectModal({ p, onClose }) {
   useEffect(() => {
     const onKey = e => {
       if (e.key !== 'Escape') return;
-      if (lightbox) { setLightbox(false); return; }
+      if (lightbox) { setLightbox(null); return; }
       onClose();
     };
     window.addEventListener('keydown', onKey);
@@ -621,8 +624,8 @@ function ProjectModal({ p, onClose }) {
   return (
     <div className="modal-bg" onClick={onClose}>
       {lightbox && (
-        <div className="lightbox-bg" onClick={e => { e.stopPropagation(); setLightbox(false); }}>
-          <img src={p.img} alt={p.title} className="lightbox-img" onClick={e => e.stopPropagation()} />
+        <div className="lightbox-bg" onClick={e => { e.stopPropagation(); setLightbox(null); }}>
+          <img src={lightbox} alt="" className="lightbox-img" onClick={e => e.stopPropagation()} />
         </div>
       )}
       <div className="modal-box" onClick={e => e.stopPropagation()}>
@@ -649,40 +652,28 @@ function ProjectModal({ p, onClose }) {
           </a>
         )}
 
-        {p.youtube && (
-          <div className="modal-section">
-            <div className="modal-section-lbl">Full Demo</div>
-            <div className="modal-yt-wrap">
-              <iframe
-                src={`https://www.youtube.com/embed/${p.youtube}`}
-                title={`${p.title} demo`}
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                allowFullScreen
-              />
-            </div>
+        {p.youtube && p.sections && (
+          <button
+            className="modal-demo-banner modal-scroll-banner"
+            style={{ background: p.accent }}
+            onClick={() => ytRef.current && ytRef.current.scrollIntoView({ behavior: 'smooth', block: 'start' })}>
+            <span>See it in Action</span>
+            <span>↓</span>
+          </button>
+        )}
+
+        {p.sections && p.details && (
+          <div className="modal-body">
+            {p.details.split('\n\n').map((para, i) => <p key={i}>{para}</p>)}
           </div>
         )}
 
-        {p.img && !p.gifs && (
+        {p.img && !p.sections && (
           <div className="modal-img-wrap" role="button" tabIndex={0}
-            onClick={() => setLightbox(true)}
-            onKeyDown={e => e.key === 'Enter' && setLightbox(true)}>
+            onClick={() => setLightbox(p.img)}
+            onKeyDown={e => e.key === 'Enter' && setLightbox(p.img)}>
             <img src={p.img} alt={p.title} className="modal-img" />
             <div className="modal-img-hint">Click to enlarge</div>
-          </div>
-        )}
-
-        {p.gifs && p.gifs.length > 0 && (
-          <div className="modal-section">
-            <div className="modal-section-lbl">In Action</div>
-            <div className="modal-gifs">
-              {p.gifs.map((g, i) => (
-                <div key={i} className="modal-gif-item">
-                  <img src={g.src} alt={g.label} />
-                  <div className="modal-gif-label">{g.label}</div>
-                </div>
-              ))}
-            </div>
           </div>
         )}
 
@@ -697,11 +688,53 @@ function ProjectModal({ p, onClose }) {
           </div>
         )}
 
-        <div className="modal-body">
-          {(p.details || p.desc).split('\n\n').map((para, i) => (
-            <p key={i}>{para}</p>
-          ))}
-        </div>
+        {p.sections && p.sections.map((sec, i) => (
+          <div key={i} className="modal-story-sec">
+            {sec.gif && sec.gifAbove && (
+              <div className="modal-story-gif" role="button" tabIndex={0}
+                onClick={() => setLightbox(sec.gif.src)}
+                onKeyDown={e => e.key === 'Enter' && setLightbox(sec.gif.src)}>
+                <img src={sec.gif.src} alt={sec.gif.label} />
+                <div className="modal-img-hint">Click to enlarge</div>
+              </div>
+            )}
+            <div className="modal-section-lbl">{sec.heading}</div>
+            <p className="modal-story-body">{sec.body}</p>
+            {sec.gif && !sec.gifAbove && (
+              <div className="modal-story-gif" role="button" tabIndex={0}
+                onClick={() => setLightbox(sec.gif.src)}
+                onKeyDown={e => e.key === 'Enter' && setLightbox(sec.gif.src)}>
+                <img src={sec.gif.src} alt={sec.gif.label} />
+                <div className="modal-img-hint">Click to enlarge</div>
+              </div>
+            )}
+          </div>
+        ))}
+
+        {p.youtube && (
+          <div className="modal-section" ref={ytRef}>
+            <div className="modal-section-lbl">Full Demo</div>
+            <div className="modal-yt-wrap">
+              <iframe
+                src={'https://www.youtube.com/embed/' + p.youtube}
+                title={p.title + ' demo'}
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allowFullScreen={true}
+              />
+            </div>
+            <a href={p.live} target="_blank" rel="noopener" className="modal-yt-foot">
+              Watch on YouTube ↗
+            </a>
+          </div>
+        )}
+
+        {!p.sections && (
+          <div className="modal-body">
+            {(p.details || p.desc).split('\n\n').map((para, i) => (
+              <p key={i}>{para}</p>
+            ))}
+          </div>
+        )}
 
         {p.highlights && p.highlights.length > 0 && (
           <div className="modal-section">
