@@ -49,6 +49,12 @@ const PROJECTS = [
         gifAbove: true,
         body: 'Every message is logged to the terminal in real time. The bot receives input, determines conversation state, queries the Sheets API for warranty data, routes to the correct ticket path, writes the ticket row directly to Google Sheets, and calls the Apps Script endpoint, which sends an automated email confirmation via MailApp. No paid backend, no OAuth complexity: a Node.js process, a Google Sheet, and an Apps Script web app URL.',
       },
+      {
+        heading: 'Email Confirmation',
+        gif: { src: 'assets/Email-confirmation WhatsApp.png', label: 'Email confirmation' },
+        gifAbove: true,
+        body: 'The final step of the flow is a confirmation email sent automatically via Apps Script\'s MailApp. Once the ticket row is written to Google Sheets, the script fires immediately, composing a structured email with the generated ticket ID, submission date, product name, serial number, reported issue, and service type, all pulled directly from the conversation data. The customer gets a receipt-style confirmation in their inbox with no manual involvement on the support side. This is what the end-to-end looks like from the customer\'s perspective: a WhatsApp chat that ends with a real support ticket and a real email.',
+      },
     ],
     img: 'assets/WhatsApp focus - GIF.gif',
     youtube: 'qZN-ZeTcFd8',
