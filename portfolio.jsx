@@ -332,10 +332,6 @@ function Sidebar({ active }) {
             <span className="sb-stat-k">projects</span>
           </div>
         </div>
-        <div className="sb-now">
-          <span className="sb-now-k">Current Work</span>
-          <span className="sb-now-v">Operations Coordinator</span>
-        </div>
       </div>
       <div className="sb-foot">
         <a href={PORT.github} target="_blank" rel="noopener" className="sb-link"><Ico n="github" /><span>GitHub</span></a>
