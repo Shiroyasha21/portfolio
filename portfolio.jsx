@@ -7,7 +7,7 @@ const PORT = {
   email:     'red.ezequiel@gmail.com',
   github:    'https://github.com/Shiroyasha21',
   notion:    'https://ezequielbportfolio.notion.site/Ezequiel-Burdios-Work-Projects-223d9c77fe7e80339fadce215b319255',
-  resumeUrl: 'https://drive.google.com/file/d/1YAbkiXKtp0qMJXWtaNNpObiXWq6O_6L_/view?usp=drive_link',
+  resumeUrl: 'https://drive.google.com/file/d/1HIviaxvD8cmak39qdkmsmHFAlbiiK_2k/view?usp=sharing',
   location:  'General Santos City, Philippines',
 };
 
