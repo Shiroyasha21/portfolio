@@ -127,6 +127,44 @@ function hasRepliedRecently(domain) {
     githubReq: true, github: null, live: null,
   },
   {
+    id: 'blender', featured: false, accent: '#5a8aae', cat: 'Creative',
+    title: 'Blender: Snowman', sub: '3D Modelling',
+    desc: 'First Blender project: mesh editing, materials, modifiers, lighting, and compositing. Groundwork for an eventual dive into 3D printing.',
+    details: 'Started with Blender because of where I want to take it eventually: 3D printing. Before investing in hardware, learning the software first was the smarter move.\n\nThis snowman was my first real project, following a 14-part tutorial by Ryan King Art. The focus wasn\'t just button familiarity. It was understanding the thinking behind how 3D work is structured: how you build a scene, how materials layer, how lighting changes everything. By the end I had hands-on experience with the full workflow from mesh editing through to compositing a final render.\n\nStill in the foundation-building phase, working toward designing original models for 3D printing.',
+    highlights: [
+      'Mesh modeling from scratch: shaping geometry by editing vertices, edges, and faces',
+      'Materials and nodes: adding surface detail, color, and visual complexity through the node editor',
+      'Modifiers: non-destructive tools for adding geometry and detail without altering base mesh',
+      'Camera and lighting setup for a clean, intentional composition',
+      'Compositing the final render inside Blender\'s compositor',
+    ],
+    tags: ['Blender', '3D Modelling', 'Rendering'],
+    img: 'assets/snowman.jpg', github: null, live: null,
+  },
+  {
+    id: 'invasion-game', featured: false, accent: '#3e8b4f', cat: 'Game',
+    title: 'Invasion Game', sub: 'Tower Defense (Godot 4)',
+    desc: 'A mobile tower defense game built solo in Godot 4. Defend a living tree from an 18-minute swarm of insects using forest-animal towers, level up mid-run with upgrade cards, and unlock skills from the tree itself. Playable right in the browser.',
+    details: 'A solo project built from scratch in Godot 4, and the first time I pushed all the way through a game idea from a blank scene to a finished, playable build on both mobile and web.\n\nThe core loop is simple to learn but escalates fast. You start with a small unlocked patch of grass around a living tree and a coin stash to spend. Insects swarm in from every direction in waves that climb from a calm trickle to a full surround, gaining new behaviors (fast, tanky, flanking, flying) one wave at a time so the player is never asked to learn more than one new thing at once. Survive the full 18 minutes and you win. Let the tree\'s HP hit zero and the run ends.\n\nEvery visual in the game, the tree, the towers, the insects, the UI icons, is drawn at runtime with code instead of sprite assets. There is no art pipeline, no image files to manage, just shapes and color composed in each object\'s draw call. Sound effects are synthesized the same way: short procedurally generated tones instead of audio files. It kept the whole project lightweight and let me focus entirely on systems and feel rather than asset production.\n\nUnder the hood, towers, mini-bosses, and rare attachments are all data-driven through Godot Resource files, so balancing or adding new content is mostly a matter of duplicating a .tres file rather than touching code. A wave-rhythm state machine handles pacing, deciding when to ramp up pressure and when to give the player a breather, especially right before a new enemy type gets introduced. A small skill tree built around the tree itself gives the player an active Shield, a high-impact Vines ultimate, and a passive boss-weakening skill to unlock with coins earned mid-run.\n\nGetting this onto an actual phone meant going through Godot\'s full Android export pipeline: setting up the Android SDK and signing, fixing a manifest orientation issue, and tuning the HUD layout for a real device screen, notch and all. I also exported a second build for the web so it can be played directly from this portfolio with no install required.',
+    highlights: [
+      'All art and sound generated procedurally at runtime, no sprite or audio asset files anywhere in the project',
+      'Wave-rhythm system that escalates pressure within a wave and unlocks one new enemy behavior at a time',
+      'Mini-bosses telegraphed several seconds in advance, each one targeting whichever side of the base is weakest',
+      'Data-driven towers, mini-bosses, and rare attachments via Godot Resource files, no code changes needed to add new content',
+      'Skill tree built around the centerpiece tree: an active Shield, a high-impact Vines ultimate, and a passive boss-weaken upgrade',
+      'Shipped to both Android (full SDK export pipeline, signing, manifest fixes) and the web (playable directly in browser)',
+    ],
+    tags: ['Godot 4', 'GDScript', 'Mobile', 'Procedural Art'],
+    img: 'assets/invasion-game-gameplay.png',
+    github: 'https://github.com/Shiroyasha21/invasion-game',
+    live: 'https://shiroyasha21.github.io/invasion-game/',
+    banner: { label: 'Play in Browser', url: 'https://shiroyasha21.github.io/invasion-game/' },
+    liveLinks: [
+      { label: 'Play in Browser', url: 'https://shiroyasha21.github.io/invasion-game/' },
+      { label: 'Download Android APK', url: 'https://drive.google.com/file/d/1ip-p4CeB3i5KUbM7EnHVR3D7mYBxWUJk/view?usp=drive_link' },
+    ],
+  },
+  {
     id: 'bot', featured: false, accent: '#7c6fb0', cat: 'Automation',
     title: 'DailyLog Bot', sub: 'Telegram to Sheets',
     desc: 'Telegram bot that accepts structured daily reports from remote workers and logs them to Google Sheets. Validates fields, timestamps entries, and surfaces per-worker stats via bot commands.',
@@ -164,43 +202,6 @@ function hasRepliedRecently(domain) {
     liveLinks: [
       { label: 'Dahilayan Adventure Park', url: 'https://www.youtube.com/watch?v=zlfLqllHMjM' },
       { label: 'Intramuros Walking Vlog',  url: 'https://drive.google.com/file/d/1AXWyTFf6cYKM_d12qM1chlg6J3d4EcLX/view?usp=sharing' },
-    ],
-  },
-  {
-    id: 'blender', featured: false, accent: '#5a8aae', cat: 'Creative',
-    title: 'Blender: Snowman', sub: '3D Modelling',
-    desc: 'First Blender project: mesh editing, materials, modifiers, lighting, and compositing. Groundwork for an eventual dive into 3D printing.',
-    details: 'Started with Blender because of where I want to take it eventually: 3D printing. Before investing in hardware, learning the software first was the smarter move.\n\nThis snowman was my first real project, following a 14-part tutorial by Ryan King Art. The focus wasn\'t just button familiarity. It was understanding the thinking behind how 3D work is structured: how you build a scene, how materials layer, how lighting changes everything. By the end I had hands-on experience with the full workflow from mesh editing through to compositing a final render.\n\nStill in the foundation-building phase, working toward designing original models for 3D printing.',
-    highlights: [
-      'Mesh modeling from scratch: shaping geometry by editing vertices, edges, and faces',
-      'Materials and nodes: adding surface detail, color, and visual complexity through the node editor',
-      'Modifiers: non-destructive tools for adding geometry and detail without altering base mesh',
-      'Camera and lighting setup for a clean, intentional composition',
-      'Compositing the final render inside Blender\'s compositor',
-    ],
-    tags: ['Blender', '3D Modelling', 'Rendering'],
-    img: 'assets/snowman.jpg', github: null, live: null,
-  },
-  {
-    id: 'invasion-game', featured: false, accent: '#3e8b4f', cat: 'Game',
-    title: 'Invasion Game', sub: 'Tower Defense (Godot 4)',
-    desc: 'A mobile tower defense game built solo in Godot 4. Defend a living tree from an 18-minute swarm of insects using forest-animal towers, level up mid-run with upgrade cards, and unlock skills from the tree itself. Playable right in the browser.',
-    details: 'A solo project built from scratch in Godot 4, and the first time I pushed all the way through a game idea from a blank scene to a finished, playable build on both mobile and web.\n\nThe core loop is simple to learn but escalates fast. You start with a small unlocked patch of grass around a living tree and a coin stash to spend. Insects swarm in from every direction in waves that climb from a calm trickle to a full surround, gaining new behaviors (fast, tanky, flanking, flying) one wave at a time so the player is never asked to learn more than one new thing at once. Survive the full 18 minutes and you win. Let the tree\'s HP hit zero and the run ends.\n\nEvery visual in the game, the tree, the towers, the insects, the UI icons, is drawn at runtime with code instead of sprite assets. There is no art pipeline, no image files to manage, just shapes and color composed in each object\'s draw call. Sound effects are synthesized the same way: short procedurally generated tones instead of audio files. It kept the whole project lightweight and let me focus entirely on systems and feel rather than asset production.\n\nUnder the hood, towers, mini-bosses, and rare attachments are all data-driven through Godot Resource files, so balancing or adding new content is mostly a matter of duplicating a .tres file rather than touching code. A wave-rhythm state machine handles pacing, deciding when to ramp up pressure and when to give the player a breather, especially right before a new enemy type gets introduced. A small skill tree built around the tree itself gives the player an active Shield, a high-impact Vines ultimate, and a passive boss-weakening skill to unlock with coins earned mid-run.\n\nGetting this onto an actual phone meant going through Godot\'s full Android export pipeline: setting up the Android SDK and signing, fixing a manifest orientation issue, and tuning the HUD layout for a real device screen, notch and all. I also exported a second build for the web so it can be played directly from this portfolio with no install required.',
-    highlights: [
-      'All art and sound generated procedurally at runtime, no sprite or audio asset files anywhere in the project',
-      'Wave-rhythm system that escalates pressure within a wave and unlocks one new enemy behavior at a time',
-      'Mini-bosses telegraphed several seconds in advance, each one targeting whichever side of the base is weakest',
-      'Data-driven towers, mini-bosses, and rare attachments via Godot Resource files, no code changes needed to add new content',
-      'Skill tree built around the centerpiece tree: an active Shield, a high-impact Vines ultimate, and a passive boss-weaken upgrade',
-      'Shipped to both Android (full SDK export pipeline, signing, manifest fixes) and the web (playable directly in browser)',
-    ],
-    tags: ['Godot 4', 'GDScript', 'Mobile', 'Procedural Art'],
-    img: 'assets/invasion-game-gameplay.png',
-    github: 'https://github.com/Shiroyasha21/invasion-game',
-    live: 'https://shiroyasha21.github.io/invasion-game/',
-    liveLinks: [
-      { label: 'Play in Browser', url: 'https://shiroyasha21.github.io/invasion-game/' },
-      { label: 'Download Android APK', url: 'https://drive.google.com/file/d/1ip-p4CeB3i5KUbM7EnHVR3D7mYBxWUJk/view?usp=drive_link' },
     ],
   },
 ];
@@ -668,7 +669,15 @@ function ProjectModal({ p, onClose }) {
           <span className="modal-cat" style={{ color: p.accent, borderColor: p.accent + '50' }}>{p.cat}</span>
         </div>
 
-        {p.live && !p.liveLinks && (
+        {p.banner && (
+          <a href={p.banner.url} target="_blank" rel="noopener" className="modal-demo-banner"
+            style={{ background: p.accent }}>
+            <span>{p.banner.label}</span>
+            <Ico n="ext" size={15} />
+          </a>
+        )}
+
+        {!p.banner && p.live && !p.liveLinks && (
           <a href={p.live} target="_blank" rel="noopener" className="modal-demo-banner"
             style={{ background: p.accent }}>
             <span>Try the Live Demo</span>
